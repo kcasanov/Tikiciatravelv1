@@ -31,10 +31,10 @@
                                data-bs-toggle="dropdown" 
                                href="#" 
                                role="button" 
-                               aria-expanded="false">[[#{plantilla.pruebas}]]</a>
+                               aria-expanded="false">[[#{plantilla.NuestrosTours}]]</a>
                             <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item" th:href="@{/pruebas/listado}">[[#{plantilla.asociaciones}]]</a></li>
-                                <li><a class="dropdown-item" th:href="@{/pruebas/listado2}">[[#{plantilla.consultas}]]</a></li>
+                                <li><a class="dropdown-item" th:href="@{/NuestrosTours/listado}">[[#{plantilla.ambientes}]]</a></li>
+                                <li><a class="dropdown-item" th:href="@{/NuestrosTours/listado2}">[[#{plantilla.filtros}]]</a></li>
                                 <li><a class="dropdown-item" th:href="@{/usuario/listado}">[[#{plantilla.usuarios}]]</a></li>
                             </ul>
                         </li>
@@ -70,18 +70,6 @@
 
             </nav>
 
-            <section id="main-header" class="py-2 bg-info text-white"
-                     style="background-image: url('/monteverdefondo.jpg'); background-size: 
-                     cover; background-repeat: no-repeat; background-position: center; height: 100vh;">
-    <div class="container">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h1><i class="fas fa-cog"></i>[[#{plantilla.suTienda}]]</h1>
-                        </div>
-                    </div>
-                </div>
-
-            </section>
         </header>
 
         <footer th:fragment="footer" class="bg-info text-white mt-5 p-2">

@@ -39,7 +39,7 @@ public class ProjectConfig implements WebMvcConfigurer {
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
         var lci = new LocaleChangeInterceptor();
-        lci.setParamName("lang");
+        lci.setParamName("lang"); 
         return lci;
     }
 
@@ -56,8 +56,8 @@ public class ProjectConfig implements WebMvcConfigurer {
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }
-    
-    /* Los siguiente métodos son para implementar el tema de seguridad dentro del proyecto */
+   
+  /* Los siguiente métodos son para implementar el tema de seguridad dentro del proyecto */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
@@ -71,7 +71,7 @@ public class ProjectConfig implements WebMvcConfigurer {
         http
                 .authorizeHttpRequests((request) -> request
                 .requestMatchers("/","/index","/errores/**",
-                        "/carrito/**","/pruebas/**","/reportes/**",
+                        "/carrito/**","/NuestrosTours/**","/reportes/**",
                         "/registro/**","/js/**","/webjars/**")
                         .permitAll()
                 .requestMatchers(
@@ -98,16 +98,16 @@ public class ProjectConfig implements WebMvcConfigurer {
     }
 
 /* El siguiente método se utiliza para completar la clase no es 
-    realmente funcional, la próxima semana se reemplaza con usuarios de BD     
+    realmente funcional, la próxima semana se reemplaza con usuarios de BD    
     @Bean
     public UserDetailsService users() {
         UserDetails admin = User.builder()
-                .username("kendal")
+                .username("juan")
                 .password("{noop}123")
                 .roles("USER", "VENDEDOR", "ADMIN")
                 .build();
         UserDetails sales = User.builder()
-                .username("juan")
+                .username("rebeca")
                 .password("{noop}456")
                 .roles("USER", "VENDEDOR")
                 .build();
@@ -117,14 +117,13 @@ public class ProjectConfig implements WebMvcConfigurer {
                 .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(user, sales, admin);
-    }*/
+    }  */ 
     
     @Autowired
-    private UserDetailsService userDetailsService;  //aqui se obtiene la info del usuario login y pass
- 
+    private UserDetailsService userDetailsService; //aqui se obtiene la info del usuario como por ejemplo el nombre, la contraseña y los roles
+
     @Autowired
     public void configurerGlobal(AuthenticationManagerBuilder build) throws Exception {
         build.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
-    
 }
