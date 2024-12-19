@@ -71,12 +71,12 @@ public class ProjectConfig implements WebMvcConfigurer {
         http
                 .authorizeHttpRequests((request) -> request
                 .requestMatchers("/","/index","/errores/**",
-                        "/carrito/**","/NuestrosTours/**","/reportes/**",
-                        "/registro/**","/js/**","/webjars/**")
+                        "/carrito/**","/Herramientas/**","/reportes/**",
+                        "/registro/**","/js/**","/webjars/**","/images/**", "/monteverdefondo.jpg")
                         .permitAll()
                 .requestMatchers(
-                        "/producto/nuevo","/producto/guardar",
-                        "/producto/modificar/**","/producto/eliminar/**",
+                        "/tour/nuevo","/tour/guardar",
+                        "/tour/modificar/**","/tour/eliminar/**",
                         "/categoria/nuevo","/categoria/guardar",
                         "/categoria/modificar/**","/categoria/eliminar/**",
                         "/usuario/nuevo","/usuario/guardar",
@@ -84,11 +84,12 @@ public class ProjectConfig implements WebMvcConfigurer {
                         "/reportes/**"
                 ).hasRole("ADMIN")
                 .requestMatchers(
-                        "/producto/listado",
+                        "/tour/listado",
                         "/categoria/listado",
                         "/usuario/listado"
                 ).hasAnyRole("ADMIN", "VENDEDOR")
-                .requestMatchers("/facturar/carrito")
+                .requestMatchers("/facturar/carrito",
+                        "Herramientas/listado","Herramientas/listado2")
                 .hasRole("USER")
                 )
                 .formLogin((form) -> form
@@ -97,27 +98,6 @@ public class ProjectConfig implements WebMvcConfigurer {
         return http.build();
     }
 
-/* El siguiente método se utiliza para completar la clase no es 
-    realmente funcional, la próxima semana se reemplaza con usuarios de BD    
-    @Bean
-    public UserDetailsService users() {
-        UserDetails admin = User.builder()
-                .username("juan")
-                .password("{noop}123")
-                .roles("USER", "VENDEDOR", "ADMIN")
-                .build();
-        UserDetails sales = User.builder()
-                .username("rebeca")
-                .password("{noop}456")
-                .roles("USER", "VENDEDOR")
-                .build();
-        UserDetails user = User.builder()
-                .username("pedro")
-                .password("{noop}789")
-                .roles("USER")
-                .build();
-        return new InMemoryUserDetailsManager(user, sales, admin);
-    }  */ 
     
     @Autowired
     private UserDetailsService userDetailsService; //aqui se obtiene la info del usuario como por ejemplo el nombre, la contraseña y los roles

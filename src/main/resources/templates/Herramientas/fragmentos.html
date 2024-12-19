@@ -9,12 +9,12 @@
                     <li class="nav-item">
                         <a class="nav-link" 
                            aria-current="page" 
-                           href="/NuestrosTours/listado"
-                           >[[#{NuestrosTours.todas}]]</a>
+                           href="/Herramientas/listado"
+                           >[[#{Herramientas.todas}]]</a>
                     </li>
                     <li th:each="categoria : ${categorias}" class="nav-item">
                         <a class="nav-link" 
-                           th:href="@{/NuestrosTours/listado/}"
+                           th:href="@{/Herramientas/listado/}"
                            >[[${categoria.descripcion}]]</a>
                     </li>                    
                 </ul>
@@ -22,9 +22,9 @@
         </section>
 
          <!-- 2 Sección principal para mostrar la informaccion de la entidad producto -->
-        <section th:fragment="listadoProductos" id="productos">
+        <section th:fragment="listadoTours" id="tours">
             <div class="row row-cols-4">
-                <div class="card" th:each="p : ${productos}">
+                <div class="card" th:each="p : ${tours}">
                     <figure><img th:src="${p.rutaImagen}" 
                                  class="card-img-top" alt="..."
                                  height="200"/>
@@ -46,18 +46,18 @@
             <div class="row py-2">
                 <div class="col-md-1"></div>
                 <div class="col-md-3">
-                    <form method="POST" th:action="@{/NuestrosTours/query2}" 
+                    <form method="POST" th:action="@{/Herramientas/query2}" 
                           class="was-validated">
                         <div class="card">                            
                             <div class="card-body">
                                 <div class="mb-3">
-                                    <label for="precioInf">[[#{NuestrosTours.precio.inferior}]]</label>
+                                    <label for="precioInf">[[#{Herramientas.precio.inferior}]]</label>
                                     <input type="number" class="form-control" 
                                            th:value="${precioInf}"
                                            th:name="precioInf" required="true"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="precioSup">[[#{NuestrosTours.precio.superior}]]</label>
+                                    <label for="precioSup">[[#{Herramientas.precio.superior}]]</label>
                                     <input type="number" class="form-control" 
                                            th:value="${precioSup}"
                                            th:name="precioSup" required="true"/>
@@ -65,7 +65,7 @@
                             </div>
                             <div class="card-footer text-center">
                                 <button type="submit" class="btn btn-info">
-                                    <i class="fas fa-check"></i> [[#{NuestrosTours.jpql}]]
+                                    <i class="fas fa-check"></i> [[#{Herramientas.jpql}]]
                                 </button>
                             </div>
                         </div>

@@ -4,9 +4,8 @@
  */
 package com.agenciaViajes.controller;
 
-import com.agenciaViajes.domain.Producto;
+import com.agenciaViajes.domain.Tour;
 import com.agenciaViajes.service.CategoriaService;
-import com.agenciaViajes.service.ProductoService;
 import com.agenciaViajes.service.impl.FirebaseStorageServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,64 +16,65 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import com.agenciaViajes.service.TourService;
 
 @Controller
 @Slf4j
-@RequestMapping("/producto")
-public class ProductoController {
+@RequestMapping("/tour")
+public class TourController {
     
     @Autowired
-    private ProductoService productoService;
+    private TourService tourService;
     
     @Autowired
     private CategoriaService categoriaService;
 
     @GetMapping("/listado")
     public String inicio(Model model) {
-        var productos = productoService.getProductos(false);
+        var tours = tourService.getTours(false);
         var categorias = categoriaService.getCategorias(false);
-        model.addAttribute("productos", productos);
+        model.addAttribute("tours", tours);
         model.addAttribute("categorias", categorias);
-        model.addAttribute("totalProductos", productos.size());
-        return "/producto/listado";
+        model.addAttribute("totalTours", tours.size());
+        return "/tour/listado";
     }
     
     @GetMapping("/nuevo")
-    public String productoNuevo(Producto producto) {
-        return "/producto/modifica";
+    public String tourNuevo(Tour tour) {
+        return "/tour/modifica";
     }
 
     @Autowired
     private FirebaseStorageServiceImpl firebaseStorageService;
     
     @PostMapping("/guardar")
-    public String productoGuardar(Producto producto,
+    public String tourGuardar(Tour tour,
             @RequestParam("imagenFile") MultipartFile imagenFile) {        
         if (!imagenFile.isEmpty()) {
-            productoService.save(producto);
-            producto.setRutaImagen(
+            tourService.save(tour);
+            tour.setRutaImagen(
                     firebaseStorageService.cargaImagen(
                             imagenFile, 
-                            "producto", 
-                            producto.getIdProducto()));
+                            "tour", 
+                            tour.getIdTour()));
         }
-        productoService.save(producto);
-        return "redirect:/producto/listado";
+        tourService.save(tour);
+        return "redirect:/tour/listado";
     }
 
-    @GetMapping("/eliminar/{idProducto}")
-    public String productoEliminar(Producto producto) {
-        productoService.delete(producto);
-        return "redirect:/producto/listado";
+    @GetMapping("/eliminar/{idTour}")
+    public String tourEliminar(Tour tour) {
+        tourService.delete(tour);
+        return "redirect:/tour/listado";
     }
 
-    @GetMapping("/modificar/{idProducto}")
-    public String productoModificar(Producto producto, Model model) {
-        producto = productoService.getProducto(producto);
+    @GetMapping("/modificar/{idTour}")
+    public String tourModificar(Tour tour, Model model) {
+        tour = tourService.getTour(tour);
         var categorias = categoriaService.getCategorias(false);
-        model.addAttribute("producto", producto);
+        model.addAttribute("tour", tour);
         model.addAttribute("categorias", categorias);
-        return "/producto/modifica";
+        return "/tour/modifica";
     }
     
 }

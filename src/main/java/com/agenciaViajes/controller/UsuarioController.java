@@ -8,6 +8,7 @@ import com.agenciaViajes.domain.Usuario;
 import com.agenciaViajes.service.FirebaseStorageService;
 import com.agenciaViajes.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author kenda
  */
 
+@Controller 
 @RequestMapping("/usuario")
 public class UsuarioController {
 

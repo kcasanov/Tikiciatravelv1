@@ -20,17 +20,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             type="button" 
                             class="btn btn-primary btn-block" 
                             data-bs-toggle="modal" 
-                            data-bs-target="#agregarProducto">
-                            <i class="fas fa-plus"></i> [[#{producto.agregar}]]
+                            data-bs-target="#agregarTour">
+                            <i class="fas fa-plus"></i> [[#{tour.agregar}]]
                         </button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 2 Fragmento para agregar producto, es la ventana modal -->
-        <section th:fragment="agregarProducto">
-            <div id="agregarProducto" 
+        <!-- 2 Fragmento para agregar tour, es la ventana modal -->
+        <section th:fragment="agregarTour">
+            <div id="agregarTour" 
                  class="modal fade" 
                  tabindex="-1" 
                  aria-labelledby="exampleModalLabel" 
@@ -38,19 +38,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 <div class="modal-dialog modal-md">
                     <div class="modal-content">
                         <div class="modal-header bg-info text-white">
-                            <h5 class="modal-title">[[#{producto.agregar}]]</h5>
+                            <h5 class="modal-title">[[#{tour.agregar}]]</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div> 
-                        <form th:action="@{/producto/guardar}" th:object="${producto}"
+                        <form th:action="@{/tour/guardar}" th:object="${tour}"
                               method="POST" class="was-validated" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{producto.descripcion}]]</label>
+                                    <label for="descripcion">[[#{tour.descripcion}]]</label>
                                     <input type="text" class="form-control" name="descripcion" required="true"/>
                                 </div>
 
                                     <div class="mb-3">
-                                        <label for="idcategoria">[[#{producto.categoria}]]</label>
+                                        <label for="idcategoria">[[#{tour.categoria}]]</label>
                                         <select class="form-select" aria-label="Default select example">
                                             <option th:each="c : ${categorias}" th:value="${c.idCategoria}" th:text="${c.descripcion}">
                                             </option>
@@ -58,27 +58,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                     </div>
                                 
                                 <div class="mb-3">
-                                    <label for="detalle">[[#{producto.detalle}]]</label>
+                                    <label for="detalle">[[#{tour.detalle}]]</label>
                                      <textarea class="form-control" name="detalle" required="true" rows="3"></textarea>                             
                                 </div>
                                 
                                   <div class="mb-3">
-                                    <label for="precio">[[#{producto.precio}]]</label>
+                                    <label for="precio">[[#{tour.precio}]]</label>
                                     <input type="number" class="form-control" name="precio" required="true"/>
                                 </div>
                                 
                                   <div class="mb-3">
-                                    <label for="existencias">[[#{producto.existencias}]]</label>
+                                    <label for="existencias">[[#{tour.existencias}]]</label>
                                     <input type="number" class="form-control" name="existencias" required="true"/>
                                 </div>
 
 
                                     <div class="mb-3">
-                                        <label for="activo">[[#{producto.activo}]]</label>
+                                        <label for="activo">[[#{tour.activo}]]</label>
                                         <input class="form-check-input" type="checkbox" name="activo" id="activo"/>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="imagen">[[#{producto.rutaImagen}]]</label>
+                                        <label for="imagen">[[#{tour.rutaImagen}]]</label>
                                         <input class="form-control" type="file" name="imagenFile" onchange="readURL(this);"/>
                                         <img id="blah" src="#" alt="your image" height="200"/>
                                     </div>
@@ -92,48 +92,48 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             </div>
         </section>
 
-        <!-- 3 Sección principal para mostrar la informaccion de la entidad producto -->
-        <section th:fragment="listadoProductos" id="productos">
+        <!-- 3 Sección principal para mostrar la informaccion de la entidad tour -->
+        <section th:fragment="listadoTours" id="tours">
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
                         <div class="card">
                             <div class="card-header">
-                                <h4>[[#{producto.listado}]]</h4>
+                                <h4>[[#{tour.listado}]]</h4>
                             </div>
-                            <div th:if="${productos != null and !productos.empty}">
+                            <div th:if="${tours != null and !tours.empty}">
                                 <table class="table table-striped table-hover">
                                     <thead class="table-dark">
                                         <tr><th>#</th>
-                                            <th>[[#{producto.descripcion}]]</th>
-                                            <th>[[#{producto.detalle}]]</th>
-                                            <th>[[#{producto.categoria}]]</th>
-                                            <th>[[#{producto.precio}]]</th>
-                                            <th>[[#{producto.existencias}]]</th>
-                                            <th>[[#{producto.total}]]</th>
-                                            <th>[[#{producto.activo}]]</th>
+                                            <th>[[#{tour.descripcion}]]</th>
+                                            <th>[[#{tour.detalle}]]</th>
+                                            <th>[[#{tour.categoria}]]</th>
+                                            <th>[[#{tour.precio}]]</th>
+                                            <th>[[#{tour.existencias}]]</th>
+                                            <th>[[#{tour.total}]]</th>
+                                            <th>[[#{tour.activo}]]</th>
                                             <th></th></tr>
                                     </thead>
                                     <tbody>
-                                        <tr th:each="producto, contador : ${productos}">
+                                        <tr th:each="tour, contador : ${tours}">
                                             <td>[[${contador.count}]]</td>
-                                            <td>[[${producto.descripcion}]]</td>
-                                            <td>[[${producto.detalle}]]</td>
-                                            <td>[[${producto.categoria.descripcion}]]</td>
-                                            <td>[[${producto.precio}]]</td>
-                                            <td>[[${producto.existencias}]]</td>
-                                            <td>[[${producto.precio*producto.existencias}]]</td>
-                                            <td th:text="${producto.activo} ? 'Activa' : 'Inactiva'" />
-                                            <td><a th:href="@{/producto/eliminar/}+${producto.idProducto}"
+                                            <td>[[${tour.descripcion}]]</td>
+                                            <td>[[${tour.detalle}]]</td>
+                                            <td>[[${tour.categoria.descripcion}]]</td>
+                                            <td>[[${tour.precio}]]</td>
+                                            <td>[[${tour.existencias}]]</td>
+                                            <td>[[${tour.precio*tour.existencias}]]</td>
+                                            <td th:text="${tour.activo} ? 'Activa' : 'Inactiva'" />
+                                            <td><a th:href="@{/tour/eliminar/}+${tour.idTour}"
                                                    class="btn btn-danger">
                                                     <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
-                                                <a th:href="@{/producto/modificar/}+${producto.idProducto}"
+                                                <a th:href="@{/tour/modificar/}+${tour.idTour}"
                                                    class="btn btn-success">
                                                     <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]</a></td></tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="text-center p-2" th:if="${productos == null or productos.empty}">
+                            <div class="text-center p-2" th:if="${tours == null or tours.empty}">
                                 <span>[[#{lista.vacia}]]</span>
                             </div>
                         </div>
@@ -141,8 +141,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <div class="col-md-3">
                         <div class="card text-center bg-success text-white mb-3">
                             <div class="card-body">
-                                <h3>[[#{producto.total}]]</h3>
-                                <h4 class="fs-2"><i class="fas fa-users"></i> [[${totalProductos}]]</h4>
+                                <h3>[[#{tour.total}]]</h3>
+                                <h4 class="fs-2"><i class="fas fa-users"></i> [[${totalTours}]]</h4>
                             </div>
                         </div>
                     </div>
@@ -151,18 +151,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         </section>
 
         <!-- 4 Fragmento que se utiliza en la página modifca.html -->
-        <section th:fragment="editarProducto">
+        <section th:fragment="editarTour">
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
                     <form method="POST"
-                          th:action="@{/producto/guardar}" 
-                          th:object="${producto}"
+                          th:action="@{/tour/guardar}" 
+                          th:object="${tour}"
                           class="was-validated"                          
                           enctype="multipart/form-data">
-                        <input type="hidden" name="idProducto" th:field="*{idProducto}"/>
+                        <input type="hidden" name="idTour" th:field="*{idTour}"/>
                         <input type="hidden" name="rutaImagen" th:field="*{rutaImagen}"/>
-                        <section th:replace="~{producto/fragmentos :: botonesEditar}"/>
+                        <section th:replace="~{tour/fragmentos :: botonesEditar}"/>
                         <div id=details>
                             <div class="container">
                                 <div class="row">
@@ -173,14 +173,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                             </div>
                                             <div class="card-body">
                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{producto.descripcion}]]</label>
+                                                    <label for="descripcion">[[#{tour.descripcion}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
                                                 </div>
                                                 
                                                 <div class="mb-3">
-                                                    <label for="idCategoria">[[#{producto.categoria}]]</label>
+                                                    <label for="idCategoria">[[#{tour.categoria}]]</label>
                                                     <select th:field="*{categoria.idCategoria}"
                                                             class="form-select" 
                                                             aria-label="Default select example">
@@ -190,21 +190,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                                 </div>
                                                 
                                                 <div class="mb-3">
-                                                    <label for="detalle">[[#{producto.detalle}]]</label>
+                                                    <label for="detalle">[[#{tour.detalle}]]</label>
                                                     <textarea class="form-control" 
                                                            name="detalle" th:field="*{detalle}"
                                                            required="true" rows="3"></textarea>
                                                 </div>
                                                 
                                                 <div class="mb-3">
-                                                    <label for="precio">[[#{producto.precio}]]</label>
+                                                    <label for="precio">[[#{tour.precio}]]</label>
                                                     <input type="number" class="form-control" 
                                                            name="precio" th:field="*{precio}"
                                                            required="true">
                                                 </div>
                                                 
                                                 <div class="mb-3">
-                                                    <label for="existencias">[[#{producto.existencias}]]</label>
+                                                    <label for="existencias">[[#{tour.existencias}]]</label>
                                                     <input type="number" class="form-control" 
                                                            name="existencias" th:field="*{existencias}"
                                                            required="true">
@@ -213,7 +213,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                                 
                                                 
                                                 <div class="mb-3">
-                                                    <label for="activo">[[#{producto.activo}]]</label>
+                                                    <label for="activo">[[#{tour.activo}]]</label>
                                                     <input class="form-check-input" 
                                                            type="checkbox" 
                                                            name="activo" 
@@ -221,10 +221,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                                            th:field="*{activo}">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="imagen">[[#{producto.rutaImagen}]]</label>
+                                                    <label for="imagen">[[#{tour.rutaImagen}]]</label>
                                                     <input class="form-control" type="file" name="imagenFile"
                                                            onchange="readURL(this);" />
-                                                    <img id="blah" th:src="@{${producto.rutaImagen}}" alt="your image" height="200"/>
+                                                    <img id="blah" th:src="@{${tour.rutaImagen}}" alt="your image" height="200"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -241,12 +241,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <div class="container py-4 mb-4 bg-light">
                 <div class="row">
                     <div class="col-md-4 d-grid">
-                        <a th:href="@{/producto/listado}" class="btn btn-primary">
+                        <a th:href="@{/tour/listado}" class="btn btn-primary">
                             <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
                         </a>
                     </div>
                     <div class="col-md-4 d-grid">                                
-                        <a th:href="@{/producto/eliminar/}+${producto.idProducto}"
+                        <a th:href="@{/tour/eliminar/}+${tour.idTour}"
                            class="btn btn-danger">
                             <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
                         </a>

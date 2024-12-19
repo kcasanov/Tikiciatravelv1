@@ -26,7 +26,7 @@ public class Categoria implements Serializable {
     
     @OneToMany
     @JoinColumn(name="id_categoria", updatable = false)
-    List<Producto> productos;
+    List<Tour> tours;
 
     public Categoria() {
     }

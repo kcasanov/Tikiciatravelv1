@@ -10,15 +10,15 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "producto")
-public class Producto implements Serializable {
+@Table(name = "tour")
+public class Tour implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_producto")
-    private Long idProducto;
+    @Column(name = "id_tour")
+    private Long idTour;
     private String descripcion;
     private String rutaImagen;
     private boolean activo;
@@ -33,11 +33,11 @@ public class Producto implements Serializable {
     
     
     
-    public Producto() {
+    public Tour() {
     }
 
-    public Producto(String producto, boolean activo) {
-        this.descripcion = producto;
+    public Tour(String tour, boolean activo) {
+        this.descripcion = tour;
         this.activo = activo;
     }
 }
